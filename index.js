@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, globalShortcut, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Store from 'electron-store';
@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename);
 const store = new Store();
 
 let win;
+let isDraggable = false;
 
 function createWindow() {
   const defaultBounds = { x: 100, y: 100 };
@@ -33,6 +34,7 @@ function createWindow() {
     },
   });
 
+  win.setIgnoreMouseEvents(true, { forward: true });
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
   win.setAlwaysOnTop(true, 'screen-saver', 1);
   win.setBackgroundColor('rgba(0, 0, 0, 0)');
@@ -44,7 +46,32 @@ function createWindow() {
   });
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+
+  globalShortcut.register('Control+Alt+Right', () => {
+    win.webContents.send('switch-theme', 'next');
+  });
+
+  globalShortcut.register('Control+Alt+Left', () => {
+    win.webContents.send('switch-theme', 'previous');
+  });
+
+  globalShortcut.register('Control+Alt+X', () => {
+    isDraggable = !isDraggable;
+    win.webContents.send('toggle-drag', isDraggable);
+
+    if (isDraggable) {
+      win.setIgnoreMouseEvents(false);
+    } else {
+      win.setIgnoreMouseEvents(true, { forward: true });
+    }
+  });
+
+  globalShortcut.register('Control+Alt+Shift+C', () => {
+    win.close();
+  });
+});
 
 app.on('window-all-closed', () => {
   app.quit();
@@ -64,16 +91,5 @@ ipcMain.on('spotify-authenticate', async (event, authUrl) => {
     await open(authUrl);
   } catch (error) {
     console.error('Error opening Spotify auth URL:', error);
-  }
-});
-
-ipcMain.on('set-ignore-mouse-events', (event, ignore) => {
-  console.log('Setting ignore mouse events:', ignore);
-  if (win) {
-    if (ignore) {
-      win.setIgnoreMouseEvents(true, { forward: true });
-    } else {
-      win.setIgnoreMouseEvents(false);
-    }
   }
 });

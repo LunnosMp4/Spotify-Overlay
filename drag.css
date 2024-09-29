@@ -12,3 +12,7 @@ body, #track-info {
 .no-drag {
   -webkit-app-region: no-drag;
 }
+
+#drag-indicator {
+  cursor: move;
+}

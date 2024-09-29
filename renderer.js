@@ -128,37 +128,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-let isDraggable = false;
-window.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.altKey) {
-    if (e.code === 'ArrowRight') {
-      e.preventDefault();
-      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-      switchTheme(currentThemeIndex);
-    } else if (e.code === 'ArrowLeft') {
-      e.preventDefault();
-      currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length;
-      switchTheme(currentThemeIndex);
-    }
-  }
+ipcRenderer.on('toggle-drag', (event, enableDrag) => {
+  const dragIndicator = document.getElementById('drag-indicator');
 
-  if (e.ctrlKey && e.altKey && !isDraggable) {
+  if (enableDrag) {
     document.body.classList.add('draggable');
-    isDraggable = true;
-    ipcRenderer.send('set-ignore-mouse-events', false);
-  }
-
-  if (e.ctrlKey && e.altKey && e.shiftKey && e.code === 'KeyC') {
-    const win = require('electron').remote.getCurrentWindow();
-    win.close();
-  }
-});
-
-window.addEventListener('keyup', (e) => {
-  if (isDraggable && (!e.ctrlKey || !e.altKey)) {
+    dragIndicator.style.display = 'block';
+  } else {
     document.body.classList.remove('draggable');
-    isDraggable = false;
-    
-    ipcRenderer.send('set-ignore-mouse-events', true);
+    dragIndicator.style.display = 'none';
   }
 });
+
+ipcRenderer.on('switch-theme', (event, direction) => {
+  if (direction === 'next') {
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  } else if (direction === 'previous') {
+    currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length;
+  }
+  switchTheme(currentThemeIndex);
+});
+

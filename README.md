@@ -86,7 +86,7 @@ This will create a distributable version of your app in the dist/ directory.
 
 ## Usage Instructions
 ### Moving the Overlay
-To move the overlay: Hold down `Ctrl + Alt` and then click and drag the overlay to your desired position on the screen.
+To move the overlay: Press `Ctrl + Alt + X` to enable drag mode and then click and drag the overlay to your desired position on the screen. When finish press `Ctrl + Alt + X` again to disable drag mode.
 
 ### Changing Themes
 To switch to the next theme: Press `Ctrl + Alt + Right Arrow`.
