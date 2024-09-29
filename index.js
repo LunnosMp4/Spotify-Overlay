@@ -33,6 +33,8 @@ function createWindow() {
     },
   });
 
+  win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+  win.setAlwaysOnTop(true, 'screen-saver', 1);
   win.setBackgroundColor('rgba(0, 0, 0, 0)');
   win.loadFile('index.html');
 
