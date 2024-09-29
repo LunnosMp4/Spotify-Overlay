@@ -5,7 +5,7 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "pack": "electron-builder --win"
+    "package": "electron-builder --win"
   },
   "type": "module",
   "keywords": [],
@@ -16,6 +16,11 @@
     "electron": "^32.1.2"
   },
   "build": {
+    "appId": "com.loic-tisseyre.spotify-overlay",
+    "productName": "Spotify Overlay",
+    "win": {
+      "target": "nsis"
+    },
     "extraFiles": [
       {
         "from": ".env",
