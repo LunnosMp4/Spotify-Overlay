@@ -1,0 +1,31 @@
+body {
+  color: #ffffff54;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  overflow: hidden;
+}
+#overlay {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#album-cover {
+  display: none;
+}
+
+#track-info {
+  margin-left: 15px;
+}
+
+#track-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff50;
+}
+
+#artist-name {
+  font-size: 14px;
+  color: #ffffff50;
+}
