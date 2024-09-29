@@ -1,13 +1,19 @@
 const { ipcRenderer } = require('electron');
 const SpotifyWebApi = require('spotify-web-api-node');
 
-require('dotenv').config();
-
+let spotifyApi;
 const port = 8888;
-const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.SPOTIFY_CLIENT_ID,
-  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-  redirectUri: `http://localhost:${port}/callback`
+
+ipcRenderer.send('get-env-variables');
+
+ipcRenderer.on('env-variables', (event, env) => {
+  spotifyApi = new SpotifyWebApi({
+    clientId: env.clientId,
+    clientSecret: env.clientSecret,
+    redirectUri: env.redirectUri
+  });
+
+  authenticate();
 });
 
 const scopes = ['user-read-currently-playing', 'user-read-playback-state'];

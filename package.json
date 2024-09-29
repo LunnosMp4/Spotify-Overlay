@@ -14,6 +14,14 @@
   "devDependencies": {
     "electron": "^32.1.2"
   },
+  "build": {
+    "extraFiles": [
+      {
+        "from": ".env",
+        "to": ".env"
+      }
+    ]
+  },
   "dependencies": {
     "dotenv": "^16.4.5",
     "electron-store": "^10.0.0",

@@ -2,6 +2,9 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Store from 'electron-store';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,6 +46,14 @@ app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   app.quit();
+});
+
+ipcMain.on('get-env-variables', (event) => {
+  event.sender.send('env-variables', {
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: `http://localhost:8888/callback`,
+  });
 });
 
 ipcMain.on('spotify-authenticate', async (event, authUrl) => {
