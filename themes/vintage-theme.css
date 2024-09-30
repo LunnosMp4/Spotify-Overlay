@@ -1,0 +1,37 @@
+body {
+  color: #d3b38c;
+  font-family: 'Georgia', serif;
+  margin: 0;
+}
+
+#overlay {
+  background: #3b3b3b;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #7f7f7f;
+}
+
+#album-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  filter: sepia(100%) contrast(80%);
+}
+
+#track-info {
+  margin-left: 15px;
+}
+
+#track-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d3b38c;
+}
+
+#artist-name {
+  font-size: 14px;
+  color: #a6a6a6;
+}

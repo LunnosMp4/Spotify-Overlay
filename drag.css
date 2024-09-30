@@ -3,12 +3,10 @@ body, #track-info {
   user-select: none;
 }
 
-/* Enable dragging when Alt + Ctrl is pressed */
 .draggable {
   -webkit-app-region: drag;
 }
 
-/* Specific areas always non-draggable */
 .no-drag {
   -webkit-app-region: no-drag;
 }

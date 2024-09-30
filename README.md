@@ -92,6 +92,9 @@ To move the overlay: Press `Ctrl + Alt + X` to enable drag mode and then click a
 To switch to the next theme: Press `Ctrl + Alt + Right Arrow`.
 To switch to the previous theme: Press `Ctrl + Alt + Left Arrow`.
 
+### Reset window position
+To reset the window position: Press `Ctrl + Alt + R`.
+
 ### Closing the Overlay
 To close the overlay window: Press `Ctrl + Alt + Shift + C`
 

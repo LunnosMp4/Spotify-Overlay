@@ -57,6 +57,10 @@ app.whenReady().then(() => {
     win.webContents.send('switch-theme', 'previous');
   });
 
+  globalShortcut.register('Control+Alt+R', () => {
+    win.setPosition(100, 100);
+  });
+
   globalShortcut.register('Control+Alt+X', () => {
     isDraggable = !isDraggable;
     win.webContents.send('toggle-drag', isDraggable);

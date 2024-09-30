@@ -110,7 +110,7 @@ authenticate();
 
 const { remote } = require('electron');
 
-const themes = ['default', 'minimalist', 'minimalist-light']
+const themes = ['default', 'minimalist', 'minimalist-light', 'vintage'];
 let currentThemeIndex = 0;
 
 function switchTheme(themeIndex) {
